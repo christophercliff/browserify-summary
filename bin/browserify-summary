@@ -1,0 +1,54 @@
+#!/usr/bin/env node
+var commander = require('commander')
+
+var SPLIT_RE = /\s*,\s*/g
+var MODULE_NAME_RE = /\/node_modules\/([^\/]*)/
+
+commander
+    .option('-v, --verbose', 'Log stuff')
+    .option('-m, --mine [modules]', 'Modules that should be counted as your own', split)
+    .parse(process.argv)
+
+var stdin = process.openStdin()
+var data = ''
+var include = commander.mine || []
+var installed = []
+
+stdin
+    .on('data', function(chunk) {
+        data += chunk
+    })
+    .on('end', function(){
+        parse(data)
+    })
+
+function parse(data) {
+    var mine = 0
+    var theirs = 0
+    var total = 0
+    var length
+    var match
+    var name
+    data = JSON.parse(data)
+    for (var key in data) {
+        length = data[key].source.length
+        match = MODULE_NAME_RE.exec(data[key].id)
+        name = match ? match[1] : null
+        if (name && include.indexOf(name) < 0) {
+            if (commander.verbose && installed.indexOf(name) < 0) console.log('installed: %j', installed[installed.push(name) - 1])
+            theirs += length
+        } else {
+            mine += length
+        }
+        total += length
+    }
+    console.log('mine: ' + percentify(mine, total) + '%, theirs: ' + percentify(theirs, total) + '%')
+}
+
+function percentify(val, total) {
+    return Math.round(val/total*100)
+}
+
+function split(arg) {
+    return arg.split(SPLIT_RE)
+}

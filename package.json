@@ -1,0 +1,17 @@
+{
+  "name": "browserify-summary",
+  "version": "0.0.0",
+  "description": "What's in your bundle?",
+  "main": "./bin/browserify-summary",
+  "bin": {
+    "browserify-summary": "./bin/browserify-summary"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christopher Cliff",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "~2.1.0"
+  }
+}
