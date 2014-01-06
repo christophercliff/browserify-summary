@@ -1,5 +1,14 @@
 # browserify-summary
 
+Outputs:
+
+```json
+{
+  "mine": 0.06,
+  "theirs": 0.94
+}
+```
+
 ## Installation
 
 ```
@@ -12,10 +21,12 @@ $ npm install -g browserify-summary
 $ browserify ./your-module.js --deps | browserify-summary
 ```
 
-Outputs `mine: 20%, theirs: 80%`.
-
 ## Help
 
 ```
 $ browserify-summary --help
 ```
+
+## License
+
+MIT

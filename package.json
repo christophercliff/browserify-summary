@@ -6,6 +6,10 @@
   "bin": {
     "browserify-summary": "./bin/browserify-summary"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/christophercliff/browserify-summary"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

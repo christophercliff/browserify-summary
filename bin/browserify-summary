@@ -42,11 +42,14 @@ function parse(data) {
         }
         total += length
     }
-    console.log('mine: ' + percentify(mine, total) + '%, theirs: ' + percentify(theirs, total) + '%')
+    process.stdout.write(JSON.stringify({
+        mine: percentify(mine, total),
+        theirs: percentify(theirs, total)
+    }, null, '  ') + '\n')
 }
 
 function percentify(val, total) {
-    return Math.round(val/total*100)
+    return Math.round(val/total*100)/100
 }
 
 function split(arg) {
